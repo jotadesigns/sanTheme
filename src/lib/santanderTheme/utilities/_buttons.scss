@@ -1,0 +1,44 @@
+//////////////////////
+// Buttons
+//////////////////////
+
+//Config
+$block_name: "button";
+
+// Utilitie
+.#{$theme_namespace}{ // namespace theme
+  &#{$block_name}{
+    $button_default: map-get($button-elements, "primary"); // por defecto .t-button es elemento 'primary'
+    // generacion boton default
+    @include button-generate($button_default);
+
+    //MODIFERS
+    //sizes
+    @each $size_key, $value in $button-sizes {
+      @include modifier($size_key) {
+        /* CSS declarations for `.#{$theme_namespace}#{$block_name}--{$size_key}` */
+        @extend .#{$theme_namespace}#{$block_name}; // extendemos clase base
+        padding: $value!important;
+      }
+    }
+
+    // ELEMENTS
+    @each $button_name, $button in $button-elements {
+      @include element($button_name) {
+        /* CSS declarations for `.#{$theme_namespace}#{$block_name}__{$button_name}` */
+        // generacion boton
+        @include button-generate($button);
+
+        // MODIFIERS
+        //sizes
+        @each $size_key, $value in $button-sizes {
+          @include modifier($size_key) {
+            /* CSS declarations for `.#{$theme_namespace}#{$block_name}__{$button_name}--{$size_key}` */
+            @extend .#{$theme_namespace}#{$block_name}__#{$button_name}; // extendemos clase base
+            padding: $value!important;
+          }
+        }
+      }
+    }
+  }
+}

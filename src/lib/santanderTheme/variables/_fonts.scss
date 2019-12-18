@@ -1,0 +1,521 @@
+////
+/// Cabecera del fichero fonts.
+/// @group Santander
+////
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// ICONOS ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Variable auxiliar que contiene los datos necesarios para genererar tipografias con iconos
+/// @type Map
+$icons: (
+  //iconos para el font-family 'ico'
+  ico : (
+    //propiedades
+    properties: (
+      class: "i-",
+      line-height: 1,
+    ),
+    //listado iconos
+    content: (
+      "download" :              "e905",
+      "aport" :                 "e906",
+      "renovatio":              "e907",
+      "susc":                   "e908",
+      "suscan":                 "e909",
+      "alertas":                "e90a",
+      "contrato":               "e90b",
+      "card-off":               "e90c",
+      "card-on":                "e90d",
+      "down-up-card":           "e90e",
+      "404":                    "e90f",
+      "bills-home":             "e910",
+      "bill-management":        "e911",
+      "bill-masive":            "e912",
+      "arrow":                  "e913",
+      "safepay":                "e914",
+      "503":                    "e915",
+      "filter-off":             "e916",
+      "filter":                 "e917",
+      "cvv":                    "e918",
+      "star":                   "e919",
+      "search":                 "e91a",
+      "active":                 "e91b",
+      "atm":                    "e91c",
+      "bill-pay":               "e91d",
+      "bill-r":                 "e91e",
+      "bizum":                  "e91f",
+      "broken-card":            "e920",
+      "tni":                    "e921",
+      "transfer-ni":            "e922",
+      "card-ch":                "e923",
+      "chat":                   "e924",
+      "commerce":               "e925",
+      "copy":                   "e926",
+      "cvv2":                   "e927",
+      "direct-money":           "e928",
+      "broker":                 "e929",
+      "edit":                   "e92a",
+      "excel":                  "e92b",
+      "flame":                  "e92c",
+      "fxpay":                  "e92d",
+      "help_us":                "e92e",
+      "inactive":               "e92f",
+      "lock-card":              "e930",
+      "documentation":          "e931",
+      "fxpay-big":              "e932",
+      "transfer-big":           "e933",
+      "logout":                 "e934",
+      "mail":                   "e935",
+      "manager":                "e936",
+      "missing-card":           "e937",
+      "mobile-r":               "e938",
+      "movements":              "e939",
+      "self-transfer":          "e93a",
+      "pay-later":              "e93b",
+      "pay-safe":               "e93c",
+      "pdf":                    "e93d",
+      "pending":                "e93e",
+      "phone":                  "e93f",
+      "pin":                    "e940",
+      "play":                   "e941",
+      "print":                  "e942",
+      "recipient-a":            "e943",
+      "refresh":                "e944",
+      "settings":               "e945",
+      "sm2":                    "e946",
+      "support":                "e947",
+      "tech_renting":           "e948",
+      "transfer-c":             "e949",
+      "transfer-i2":            "e94a",
+      "transfer-n":             "e94b",
+      "transfer-p":             "e94c",
+      "warning":                "e94d",
+      "whatsapp":               "e94e",
+      "sesion-off":             "e94f",
+      "easy-payment":           "e950",
+      "countdown":              "e951",
+      "sel-list":               "e952",
+      "reno":                   "e953",
+      "security":               "e954",
+      "transint":               "e955",
+      "printing":               "e956",
+      "calc":                   "e957",
+      "liq":                    "e958",
+      "interv":                 "e959",
+      "homelink":               "e95a",
+      "faqchat":                "e95b",
+      "paper":                  "e95c",
+      "cca":                    "e95d",
+      "c-grid":                 "e95e",
+      "bag":                    "e95f",
+      "check":                  "e960",
+      "insert":                 "e961",
+      "menu":                   "e962",
+      "cancant":                "e963",
+      "logo-spb2":              "e964",
+      "chat2":                  "e965",
+      "clockwise":              "e966",
+      "commodity":              "e967",
+      "cutcheck":               "e968",
+      "logo-sel2":              "e969",
+      "eurcorp":                "e96a",
+      "idea":                   "e96b",
+      "localizacion":           "e96c",
+      "mobile":                 "e96d",
+      "noCost":                 "e96e",
+      "logo-ret2":              "e96f",
+      "operative":              "e970",
+      "onepaynofx":             "e971",
+      "play2":                  "e972",
+      "sofia":                  "e973",
+      "twitter":                "e974",
+      "calendar":               "e975",
+      "carsafe":                "e976",
+      "credcard":               "e977",
+      "investments":            "e978",
+      "invsafe":                "e979",
+      "obsolote":               "e97a",
+      "protecinversion":        "e97b",
+      "protect":                "e97c",
+      "protinvestment":         "e97d",
+      "safehouse":              "e97e",
+      "savings":                "e97f",
+      "statics":                "e980",
+      "accounts":               "e981",
+      "world-123":              "e982",
+      "onepay":                 "e983",
+      "logo-ret":               "e984",
+      "logo-sel":               "e985",
+      "logo-spb":               "e986",
+      "appper":                 "e987",
+      "cdomiciliacion":         "e900",
+      "cjudicial":              "e901",
+      "emisora":                "e902",
+      "ssocial":                "e903",
+      "tributo":                "e904",
+      "sms":                    "e989",
+      "analisis":               "e988",
+      "acciones":               "e98a",
+      "comparador":             "e98b",
+      "distribucion":           "e98c",
+      "finder":                 "e98d",
+      "reembolso":              "e98e",
+      "arrowneg":               "e98f",
+      "xclose":                 "e990",
+      "arrowpos":               "e991",
+      "carterasges":            "e992",
+      "carterasgesno":          "e993",
+      "operative2":             "e994",
+      "rentabilidad":           "e995",
+      "clip":                   "e996",
+      "full-facebook":          "e997",
+      "full-twitter":           "e998",
+      "santander-experiences":  "e99a",
+      "ico_telephone":          "e999",
+      "ico_double_arrow":       "e99d",
+      "ico_trainn":             "e99b",
+      "cart-gest2":             "e99f",
+      "cart-gest":              "e9a0",
+      "person":                 "e99c",
+      "ico_cycle":              "e99e",
+      "seguro-hogar":           "e9a1",
+      "acciones-2":             "e9a2",
+      "opfinancieras":          "e9a3",
+      "vistaclasica":           "e9a5",
+      "ettfs":                  "e9a6",
+      "info":                   "e9a7",
+      "filter-n":               "e9a8",
+      "downloadpg":             "e9a9",
+      "segah":                  "e9aa",
+      "infase":                 "e9ab",
+      "changeaport":            "e9ac",
+      "activeaport":            "e9ad"
+    )
+  ),
+  sanicon : (
+    //propiedades
+    properties: (
+      class: "o-",
+      line-height: 1,
+    ),
+    //listado iconos
+    content: (
+      "calendario" :              "e905",
+      "editar" :                  "e906",
+      "gestor-online" :           "e907",
+      "localizador" :             "e908",
+      "mensaje" :                 "e909",
+      "movil" :                   "e90a",
+      "multivista" :              "e90b",
+      "no-coste" :                "e90c",
+      "sobre" :                   "e90d",
+      "telefono" :                "e90e",
+      "thumb-up" :                "e90f",
+      "tiempo" :                  "e910",
+      "mobileblock" :             "e911",
+      "trash":                    "e912",
+      "infoicon" :                "e913",
+      "plus" :                    "e914",
+      "sanmini" :                 "e922",
+      "mobileincoming" :          "e949",
+      "bansacar" :                "e96a",
+      "businessbag" :             "e995",
+      "blocker" :                 "ea05",
+      "window" :                  "ea4c",
+      "time" :                    "ea85",
+      "blockeradvise" :           "eaad",
+      "city" :                    "eac6",
+      "civitas" :                 "e900",
+      "cross-eye" :               "e901",
+      "eye" :                     "e902",
+      "headset" :                 "e903",
+      "keyboard" :                "e904",
+      "sms" :                     "e989",
+
+      // "mobileslim" :              "e943",
+
+    )
+  )
+);
+
+
+/// Tamaño base de todos los iconos
+/// @type String
+$icon-font-size: 14px;
+
+/// Posibles tamaños que pueden adoptar los iconos
+/// @type Map
+/// @require $icon-font-size
+$icon-font-sizes: (
+  "small" : $icon-font-size / 2, // 7px
+  "regular": $icon-font-size, // 14px
+  "medium": 20px, // 20px
+  "big": $icon-font-size * 2, // 28px
+  "extrabig": $icon-font-size * 3 // 42px
+);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// FONTS ////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+/*********************************/
+/************* Fonts *************/
+/*********************************/
+
+
+/// Base por defecto del font-size
+/// @type String
+$font-size-base: 16px !default; // Base
+/// Base por defecto del font-size para h1
+/// @type String
+/// @require $font-size-base
+$h1-font-size:  $font-size-base * 2.5 !default;
+/// Base por defecto del font-size para h2
+/// @type String
+/// @require $font-size-base
+$h2-font-size:  $font-size-base * 2 !default;
+/// Base por defecto del font-size para h3
+/// @type String
+/// @require $font-size-base
+$h3-font-size:  $font-size-base * 1.75 !default;
+/// Base por defecto del font-size para h4
+/// @type String
+/// @require $font-size-base
+$h4-font-size:  $font-size-base * 1.5 !default;
+/// Base por defecto del font-size para h5
+/// @type String
+/// @require $font-size-base
+$h5-font-size:  $font-size-base * 1.25 !default;
+/// Base por defecto del font-size para h6
+/// @type String
+/// @require $font-size-base
+$h6-font-size:  $font-size-base !default;
+
+/// Modificador del tamaño de fuente estandarizado a extrasmall
+/// @type String
+/// @require $font-size-base
+$font-size-extrasmall:  $font-size-base * .75 !default;
+/// Modificador del tamaño de fuente estandarizado a small
+/// @type String
+/// @require $font-size-base
+$font-size-small:       $font-size-base * .875 !default;
+/// Modificador del tamaño de fuente estandarizado a regular
+/// @type String
+/// @require $font-size-base
+$font-size-regular:     $font-size-base !default;
+/// Modificador del tamaño de fuente estandarizado a large
+/// @type String
+/// @require $font-size-base
+$font-size-large:       $font-size-base * 1.125 !default;
+/// Modificador del tamaño de fuente estandarizado a extralarge
+/// @type String
+/// @require $font-size-base
+$font-size-extralarge:  $font-size-base * 1.25 !default;
+
+/// Base por defecto de la altura de líneas
+/// @type String
+$line-height-base:            1.5 !default;
+
+
+/**************************************/
+/************* FONT STACK *************/
+/**************************************/
+$font-formats: (eot woff woff2 ttf svg);
+$font-replacements: (Arial, sans-serif);
+$base-font-stack: (
+  // Fonts - lato
+  lato: (
+    bold: (
+      family: (lato, $font-replacements),
+      weight: 700,
+      style: normal,
+      font-face: (
+        family: 'lato',
+        path: 'text/lato/Lato-Bold',
+        formats: $font-formats
+      )
+    ),
+    semibold: (
+      family: (lato, $font-replacements),
+      weight: 600,
+      style: normal,
+      font-face: (
+        family: 'lato',
+        path: 'text/lato/Lato-Semibold',
+        formats: $font-formats
+      )
+    ),
+    regular: (
+      family: (lato, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'lato',
+        path: 'text/lato/Lato-Regular',
+        formats: $font-formats
+      )
+    ),
+    light: (
+      family: (lato, $font-replacements),
+      weight: 300,
+      style: normal,
+      font-face: (
+        family: 'lato',
+        path: 'text/lato/Lato-Light',
+        formats: $font-formats
+      )
+    )
+  ),
+  // Santander - headline
+  headline: (
+    bold: (
+      family: (headline, $font-replacements),
+      weight: 700,
+      style: normal,
+      font-face: (
+        family: 'headline',
+        path: 'text/santander/headline/SantanderHeadlineW05-Bold',
+        formats: $font-formats
+      )
+    ),
+    boldItalic: (
+      family: (headline, $font-replacements),
+      weight: 700,
+      style: italic
+    ),
+    regular: (
+      family: (headline, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'headline',
+        path: 'text/santander/headline/SantanderHeadlineW05-Rg',
+        formats: $font-formats
+      )
+    ),
+    italic: (
+      family: (headline, $font-replacements),
+      weight: 400,
+      style: italic
+    )
+  ),
+  // Santander - text
+  text: (
+    bold: (
+      family: (text, $font-replacements),
+      weight: 700,
+      style: normal,
+      font-face: (
+        family: 'text',
+        path: 'text/santander/text/SantanderTextW05-Bold',
+        formats: $font-formats
+      )
+    ),
+    boldItalic: (
+      family: (text, $font-replacements),
+      weight: 700,
+      style: italic
+    ),
+    regular: (
+      family: (text, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'text',
+        path: 'text/santander/text/SantanderTextW05-Regular',
+        formats: $font-formats
+      )
+    ),
+    light: (
+      family: (text, $font-replacements),
+      weight: 300,
+      style: normal,
+      font-face: (
+        family: 'text',
+        path: 'text/santander/text/SantanderTextW05-Light',
+        formats: $font-formats
+      )
+    ),
+    italic: (
+      family: (text, $font-replacements),
+      weight: 400,
+      style: italic
+    ),
+    lightItalic: (
+      family: (text, $font-replacements),
+      weight: 300,
+      style: italic
+    ),
+  ),
+  // Icons
+  icons: (
+    ico: (
+      icons:  map-get($icons, "ico"),
+      family: (ico, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'ico',
+        path: 'icon/icons/ico3',
+        formats: (eot woff ttf svg)
+      )
+    ),
+    sanicon: (
+      icons:  map-get($icons, "sanicon"),
+      family: (sanicon, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'sanicon',
+        path: 'icon/sanicon/san-icon',
+        formats: $font-formats
+      )
+    )
+  ),
+  // Secure fonts
+  secure: (
+    asterisk: (
+      family: (secure-asterisk, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'secure-asterisk',
+        path: 'text/secure/secure-asterisk',
+        formats: $font-formats
+      )
+    ),
+    circle: (
+      family: (secure-circle, $font-replacements),
+      weight: 400,
+      style: normal,
+      font-face: (
+        family: 'secure-circle',
+        path: 'text/secure/secure-circle',
+        formats: $font-formats
+      )
+    )
+  )
+);
+
+
+/// Valores para modificador del tamaño de tipografia
+/// @type Map
+/// @require $font-size-extrasmall
+/// @require $font-size-small
+/// @require $font-size-regular
+/// @require $font-size-large
+/// @require $font-size-extralarge
+$font-sizes: (
+  "extrasmall":     $font-size-extrasmall,
+  "small":          $font-size-small,
+  "regular":        $font-size-regular,
+  "large":          $font-size-large,
+  "extralarge":     $font-size-extralarge
+);
+
+
+

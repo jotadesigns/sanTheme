@@ -1,0 +1,16 @@
+/*!
+ * Santander Theme
+ * Copyright 2018 HBS
+ * Copyright 2018 Ciber Experis.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+// Importamos todos los archivos .scss shared
+
+ @import "functions";       // Funciones comunes
+ @import "variables";       // Variables
+ @import "mixins";          // Mixins
+ @import "placeholders";    // Placeholders
+
+ //@import "transitions";   // Transiciones
+//  @import "utilities";     // Utilidades (clases globales) // NO DESCOMENTAR NI DE COÑA!

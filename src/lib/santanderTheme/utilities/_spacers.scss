@@ -1,0 +1,84 @@
+//////////////////////
+// Spacer
+//////////////////////
+.#{$theme_namespace}{ // namespace theme
+
+  // Margin, padding
+  @each $group in $spacer_groups {
+    // GRUPO
+    &#{$group} {
+      #{$group} : getSpace();
+      // MODIFIERS
+      //size
+      @each $key, $value in $spacers {
+        @include modifier($key) {
+          /* CSS declarations for `.t-#{$group}--{$size}` */
+          #{$group}: getSpace($key) !important;
+        }
+      }
+      //reset
+      @include modifier('no#{$group}'){
+        /* CSS declarations for `.t-#{$group}--{no$group}` */
+        #{$group}: getSpace(0) !important;
+      }
+
+      //ELEMENT
+      @each $position, $value in $positions {
+        @include element($position){
+          /* CSS declarations for `.t-#{$group}__{$position}` */
+          #{$group}-#{$position}: getSpace();
+
+          // MODIFIERS ELEMENT
+          // size
+          @each $key, $value in $spacers {
+            @include modifier($key) {
+              /* CSS declarations for `.t-#{$group}__{$position}--{$size}` */
+              #{$group}-#{$position}: getSpace($key) !important;
+            }
+          }
+          //reset
+          @include modifier('no#{$group}'){
+            /* CSS declarations for `.t-#{$group}__{$position}--{no$group}` */
+            #{$group}-#{$position}: getSpace(0) !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Separador
+  &separador{
+    // por defecto separacion en bottom
+    @include separador-generate();
+
+    //MODIFIERS
+    //size
+    @each $key, $value in $spacers {
+      @include modifier($key) {
+        /* CSS declarations for `.t-separador--{$size}` */
+        @include separador-generate($size: $key);
+      }
+    }
+
+    //ELEMENT
+    @each $position, $value in $positions {
+      @include element($position){
+        /* CSS declarations for `.t-separador__{$position}` */
+        @include separador-generate($position);
+
+        //MODIFIERS
+        //size
+        @each $key, $value in $spacers {
+          //quitamos en left y right modificador de tamaño
+          //dado que solo se introduce un borde
+
+          @include modifier($key) {
+          /* CSS declarations for `.t-separador__{$position}--{$size}` */
+            @include separador-generate($position, $key);
+          }
+
+        }
+      }
+    }
+  }
+}

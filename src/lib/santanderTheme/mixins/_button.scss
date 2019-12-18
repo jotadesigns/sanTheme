@@ -1,0 +1,68 @@
+////
+/// Cabecera del fichero button.
+/// @group Santander
+////
+
+/// Button Generate - Genera las clases de iconos necesarias extendiendo la clase base de iconos
+/// @access public
+/// @param {Map} $button_element  datos del elemento en base al modelo de `$button-elements`
+/// @example
+/// font-icons-generate($button_element, "t-")
+@mixin button-generate(
+  $button_element
+){
+  // Extraccion de datos del modelo
+  // global
+  $props_global: map-get($button_element, global);
+  //active
+  $props_active: map-get($button_element, active);
+  //disabled
+  $props_disabled: map-get($button_element, disabled);
+  //material
+  $class_material: map-get($button_element, materialSet);
+
+  //render global props
+  @each $prop, $value in $props_global {
+    #{$prop}: $value;
+  }
+
+  //render active props
+  @each $prop, $value in $props_active {
+    &:not([disabled]):hover, &:not([disabled]):active{
+      #{$prop}: $value !important;
+    }
+  }
+
+  //render disabled props
+  @each $prop, $value in $props_disabled {
+    &[disabled]{
+      #{$prop}: $value !important;
+    }
+  }
+
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  //reset material props
+  @each $class, $reglas in $class_material {
+    ::ng-deep{
+      >#{$class} {
+        @each $prop_name, $val in $reglas {
+          #{$prop_name}: $val !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin button-base-generate($button_element){
+  // Extraccion de datos del modelo
+  // global
+  $common_props: map-get($button_element, global);
+
+  //render global props
+  @each $prop, $value in $common_props {
+    #{$prop}: $value;
+  }
+}

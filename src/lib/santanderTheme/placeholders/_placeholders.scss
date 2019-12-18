@@ -1,0 +1,160 @@
+//********************************************************//
+//*** PLACEHOLDERS (permite extender clases nesteadas) ***//
+//********************************************************//
+
+// Material select/autocomplete
+%mat-option {
+  color: #7b7b7b!important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  height: auto !important;
+  width: 100%;
+  font-size: 14px !important;
+  padding: 15px 12px;
+  white-space: normal;
+  box-sizing: border-box;
+  // @include font(text); // todo: font_semibold
+  @include font(text, bold);
+}
+
+%mat-active {
+  color: #4e4e4e !important;
+  background: #efefef !important;
+}
+
+%mat-option-text {
+  word-wrap: break-word;
+  line-height: 1em;
+  padding: 1px;
+}
+
+%mat-autocomplete-panel {
+  max-height: 240px;
+  background: #fff;
+  border-radius: 0;
+  padding: 0 5px 10px 5px !important;
+  border: #e3e3e3 solid 1px !important;
+  border-top: none!important;
+  box-shadow: none!important;
+  max-width: none !important;
+  min-width: 100% !important;
+  width: 100% !important;
+  margin-top: -1px;
+  animation: autocomplete-slide-down 0.3s ease;
+  box-sizing: border-box;
+}
+
+// Material - forms
+%inputBorder {
+  border: #e3e3e3 solid 1px;
+  border-bottom: 1px solid #1bb3bc;
+}
+%input {
+  @extend %inputBorder;
+  @include font(text, bold);
+  color: #7b7b7b;
+  background-color: #fff;
+  padding: 0 14px;
+}
+
+// component separators
+%component {
+  display: block;
+}
+%componentTopSeparator {
+  // @extend %component;
+  margin-top: getSpace("large")!important;
+}
+%componentBottomSeparatorSmall {
+  // @extend %component;
+  margin-bottom: getSpace("small")!important;
+}
+%componentBottomSeparator {
+  // @extend %component;
+  margin-bottom: getSpace("large")!important;
+}
+%componentTopSeparatorLarge {
+  // @extend %component;
+  margin-top: getSpace("large")!important;
+}
+%componentBottomSeparatorLarge {
+  // @extend %component;
+  margin-bottom: getSpace("extralarge")!important;
+}
+
+%capitalizeFirstLetter {
+  text-transform: lowercase !important;
+  &::first-letter{
+    text-transform: capitalize !important;
+  }
+}
+// para titulos de componente
+%componentTitle {
+  color: getColor()!important;
+  font-size: getFontSize()!important;
+  @include font(headline, bold, $priority: true);
+  padding-right: 8px;
+  @extend %capitalizeFirstLetter;
+}
+// SCA
+%scaTitle {
+  color: #4a4a4a!important;
+  font-size: 24px;
+  @include font(text, $priority: true); // todo: font_semibold
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 25px;
+}
+%scaIconLogo {
+  opacity: 0.8;
+  margin-bottom: 20px;
+  display: block;
+  margin-top: 10px;
+}
+%scaDetails {
+  background-color: #f5f9fb;
+  margin-top: 25px;
+  height: auto;
+  padding: 20px;
+}
+%scaActionButton {
+  margin-top: 30px;
+  display: inline-flex;
+  text-align: center;
+}
+%scaDescriptionText {
+  color: rgba(74, 74, 74, 0.8) !important;
+  font-size: 16px;
+  @include font(text, $priority: true);
+}
+//Amortización Parcial .message
+%amortizacionHowMuch {
+  font-size: getFontSize('small')!important;
+  color: getColor('san_gray-light')!important;
+}
+%amortizacionModalContent {
+    line-height: 24px;
+}
+%amortizacionModalContentItem {
+      margin-bottom: 15px;
+}
+%amortizacionModalContentItemTitle {
+  color: getColor('san_red')!important;
+  @include font(text, bold);
+}
+//Mandatory field
+%mandatoryField {
+  font-size: getFontSize('small')!important;
+  color: getColor('san_gray-light')!important;
+  text-transform: none;
+  width: 100%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+// Buttons ( filter )
+%buttonSeparator {
+  border-right: 1px solid #bfbebe;
+  padding-right: 10px;
+  margin-right: 10px;
+}

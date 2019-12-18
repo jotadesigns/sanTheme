@@ -1,0 +1,189 @@
+////
+/// Cabecera del fichero content.
+/// @group Santander
+////
+
+/*********************************/
+/************ Pantone ************/
+/*********************************/
+
+//////////// Grises
+
+/// Escala gris - gris extralight
+/// @type String
+$san_gray-extralight: #A7A7A7 !default;
+
+/// Escala gris - gris light
+/// @type String
+$san_gray-light: #808080 !default;
+
+/// Escala gris - gris dark
+/// @type String
+$san_gray-dark: #666666 !default;
+
+/// Escala gris - gris dark
+/// @type String
+$san_gray-table: #EDEDED !default;
+
+/// Escala gris - gris semilight
+/// @type String
+$san_gray-button: #9b9b9b !default;
+
+/// Contiene el espectro de posibles colores grises estandarizados
+/// @type Map
+/// @require $san_gray-extralight
+/// @require $san_gray-light
+/// @require $san_gray-dark
+/// @require $san_gray-table
+/// @require $san_gray-button
+$greys: (
+  "san_gray-extralight": $san_gray-extralight,
+  "san_gray-light" :  $san_gray-light,
+  "san_gray-dark" : $san_gray-dark,
+  "san_gray-table" : $san_gray-table,
+  "san_gray-button" : $san_gray-button
+);
+
+//////////// Colores
+
+/// Color - blanco
+/// @type String
+$san_white: #fff !default;
+/// Color - negro
+/// @type String
+$san_black: #000 !default;
+/// Color - rojo
+/// @type String
+$san_red: #EC0000 !default;
+/// Color - verde
+/// @type String
+$san_green: #ABC111 !default;
+/// Color - verde success
+/// @type String
+$san_green_success: #63ba68 !default;
+/// Color - naranja
+/// @type String
+$san_orange: #E59D27 !default;
+/// Color - azul
+/// @type String
+$san_blue: #1BB3BC !default;
+/// Color - azul
+/// @type String
+$san_blue_light: #f5f9fb !default;
+/// Color - azul
+/// @type String
+$san_blue_dark: #157b81  !default;
+/// Color - azul
+/// @type String
+$san_crimson: #781d1d !default;
+
+$san_colors: () !default;
+
+//////////// Map
+$colors: () !default;
+$colors: map-merge($greys , $colors );
+/// Contiene el espectro de posibles colores y grises estandarizados
+/// @type Map
+/// @require $greys
+/// @require $san_white
+/// @require $san_black
+/// @require $san_red
+/// @require $san_green
+/// @require $san_green_success
+/// @require $san_orange
+/// @require $san_blue
+$colors: map-merge(
+  (
+    "san_white":   $san_white,
+    "san_black":   $san_black,
+    "san_red":     $san_red,
+    "san_green":   $san_green,
+    "san_green_success":   $san_green_success,
+    "san_orange":  $san_orange,
+    "san_blue":    $san_blue,
+    "san_blue_dark":    $san_blue_dark,
+    "san_blue_light":    $san_blue_light,
+    "san_crimson":    $san_crimson,
+  ),
+  $colors
+);
+
+$colors_variants: () !default;
+/// permite crear variantes de colores de la paleta principal
+/// @type Map
+$color_variants: (
+  "normal": 1,
+  "light": .75,
+  "extralight": .4,
+  "transparent": .15
+);
+
+$graph_types: (
+  "type_red": rgba(236, 0, 0, 1),
+  "type_lightblue": rgba(27, 179, 188, 1),
+  "type_green": rgba(99, 186, 104, 1),
+  "type_yellow": rgba(255, 204, 51, 1),
+  "type_purple": rgba(158, 54, 103, 1),
+  "type_blue": rgba(74, 144, 226, 1),
+  "type_lime": rgba(165, 206, 67, 1),
+  "type_lila": rgba(226, 74, 176, 1),
+  "type_orange": rgba(226, 145, 74, 1),
+  "type_default": rgba(125, 125, 125, 1),
+  "type_loading": rgba(125, 125, 125, 0.29)
+);
+
+/*********************************/
+/************ Borders ************/
+/*********************************/
+
+/// base por defecto del color de los bordes
+/// @type String
+$border-color: #d9d9d9 !default;
+
+$border-colors: () !default;
+$border-colors: map-merge($greys , $border-colors );
+/// Colores para los bordes. Contiene adicionalmente colores `$greys`.
+/// @type Map
+/// @require $greys
+/// @require $san_red
+/// @require $san_orange
+$border-colors: map-merge(
+  (
+    "san_red":     $san_red,
+    "san_orange":  $san_orange
+  ),
+  $border-colors
+);
+
+/*********************************/
+/************ Shadows ************/
+/*********************************/
+$box-shadow-colors: ("main": #C3C3C3) !default;
+
+/// Posibles colores para los box-shadow. Mirar keys `$greys`.
+/// @type Map
+/// @require $greys
+$box-shadow-colors: map-merge($greys , $box-shadow-colors );
+
+/// Base por defecto del color de los box-shadow
+/// @type String
+$box-shadow-color: map-get($box-shadow-colors, "main");
+
+
+
+
+
+
+
+/*********************************/
+/************ Cursor ************/
+/*********************************/
+$block_cursor_name: "cursor";
+$cursor_elements: (
+  pointer: pointer,
+  crosshair: crosshair,
+  default: default,
+  move: move,
+  inherit: inherit
+);
+

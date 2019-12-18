@@ -1,0 +1,25 @@
+/***********************************/
+/********* mixins loader ***********/
+/***********************************/
+
+// Helpers
+@import './mixins/utilities';
+
+// BEM
+@import './mixins/bem';
+
+// Border
+@import './mixins/border-radius';
+
+// Shadows
+@import './mixins/box-shadow';
+
+// Fonts
+@import './mixins/font';
+
+// Separador
+@import './mixins/separador';
+
+// Button
+@import './mixins/button';
+

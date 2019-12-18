@@ -1,0 +1,37 @@
+/**********************************/
+/*********** 1 - Config ***********/
+/**********************************/
+// Modifica rápidamente el estilo global habilitando o deshabilitando funciones opcionales.
+
+////
+/// Cabecera del fichero config.
+/// @group Santander
+////
+
+/// Controla si estan activos los bordes redondeados
+/// @type Boolean
+$enable-rounded:            true !default;
+
+/// Controla si estan activas las sombras
+/// @type Boolean
+$enable-shadows:            true !default;
+
+/// Controla si estan activos los gradientes
+/// @type Boolean
+$enable-gradients:          true !default;
+
+/// Controla si estan activas las transiciones
+/// @type Boolean
+$enable-transitions:        true !default;
+
+/// Controla el namespace de clases de tipo template
+/// @type String
+$theme_namespace: "t-";
+
+/// Controla el namespace de clases de tipo de componente
+/// @type String
+$component_namespace: "c-";
+
+/// Base path for assets (fonts, images...), should not include trailing slash
+/// @type String
+$asset-base-path: 'assets' !default;

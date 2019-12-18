@@ -1,0 +1,219 @@
+////
+/// Cabecera del fichero font.
+/// @group Santander
+////
+
+
+@mixin font-icon-base(
+  $font-data,
+  $namespace
+)
+{
+  // Extraccion de datos del modelo
+  $font-family: map-get($font_data, "family");
+  $icons_full: map-get($font_data , "icons");
+  $font-properties: map-get($icons_full, "properties");
+
+  // Get properties data
+  $class: map-get($font-properties, "class");
+  $line-height: map-get($font-properties, "line-height");
+
+  // Create base class
+  .#{$namespace}#{$class}:before{
+    font-family: $font-family !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: $line-height;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: $icon-font-size;
+  }
+}
+
+
+
+/// Font Icons Generate - Genera las clases de iconos necesarias extendiendo la clase base de iconos
+/// @access public
+/// @param {Map} $font-data  datos de tipografía en base al modelo de `$font-faces`
+/// @param {String} $namespace  namespace que se aplicará para la creacion de las clases
+/// @require {function} unicode
+/// @example
+/// font-icons-generate($font_data, "t-")
+@mixin font-icon-generate(
+  $font-data,
+  $namespace
+){
+  // Extraccion de datos del modelo
+  $icons_full: map-get($font_data , "icons");
+  $icons_content: map-get($icons_full, "content");
+  $font-properties: map-get($icons_full, "properties");
+
+  // Get properties data
+  $class: map-get($font-properties, "class");
+
+  // Creación de clases auxiliares para iconos
+  @each $icon_name, $value_content in $icons_content {
+    .#{$namespace}#{$class}#{$icon_name}:before{
+      @extend .#{$namespace}#{$class}; //heredamos la clase base (para poder extender desde comp o como clase en html)
+      content: unicode($value_content);
+    }
+
+    //MODIFIERS
+    .#{$namespace}#{$class}#{$icon_name}{
+      //size
+      @each $size_name, $size in $icon-font-sizes {
+        @include modifier($size_name+":before") {
+          // @extend .#{$namespace}#{$class}#{$icon_name};
+          font-size: $size !important;
+        }
+      }
+      //color
+      @each $color_name, $color_value in $colors {
+        @include modifier($color_name) {
+          border-color: $color_value!important;
+          &::before {
+            color: $color_value !important;
+          }
+        }
+      }
+      // rotate
+      @each $rotate_name, $rotate_value in $rotateOptions {
+        @include modifier($rotate_name) {
+          transform: rotate($rotate_value);
+        }
+      }
+    }
+
+    //MODIFIERS
+    .#{$namespace}#{$class}h-#{$icon_name}{
+      //hover
+      @each $color_name, $color_value in $colors {
+        @include modifier($color_name+":hover") {
+          border-color: $color_value!important;
+          &::before {
+            color: $color_value !important;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+/// Font styling shorthand
+///
+/// @param {String} $group
+/// @param {String} $variant
+/// @param {Map} $properties
+/// @param {Map} $font-stack (optional)
+///
+/// @example
+///  @include font(helvetica, bold);
+///
+/// @requires {function} font-properties
+@mixin font($group, $variant: regular, $properties: family weight style, $font-stack: $base-font-stack, $priority: false){
+  $font-properties: map-deep-get($font-stack, $group, $variant);
+  @if $font-properties {
+    @each $key, $value in $font-properties {
+      @if contains($properties, $key) {
+        @if $priority ==  false {
+          font-#{$key}: $value;
+        } @else {
+          font-#{$key}: $value !important;
+        }
+      }
+    }
+  }
+}
+
+
+@function contains($list, $values...) {
+  @each $value in $values {
+    @if type-of(index($list, $value)) != 'number' {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+
+
+/// Add the font-face rules for all used fonts
+/// @return {String} font-face rules
+///
+/// @requires {function} map-deep-get
+/// @requires {function} font-face
+@mixin import-fonts($font-stack: $base-font-stack) {
+
+  @each $group_name, $group in $font-stack {
+    @each $group_variant_name, $group_variant in $group {
+      $font-properties: map-deep-get($font-stack, $group_name, $group_variant_name);
+      @if $font-properties {
+        // If we have a font-face key we create the font-face rule
+        $font-face: map-get($font-properties, font-face);
+        @if $font-face {
+          $font-family: map-get($font-face, family);
+          $file-path: map-get($font-face, path);
+          $file-formats: map-get($font-face, formats);
+          $font-weight: map-get($font-properties, weight);
+          $font-style: map-get($font-properties, style);
+
+          @if $file-formats {
+            @include font-face($font-family, $file-path, $font-weight, $font-style, $file-formats);
+          } @else {
+            @include font-face($font-family, $file-path, $font-weight, $font-style);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/// Add a font-face rule
+/// @return {String} font-face rule
+///
+/// @requires {function} font-source-declaration
+@mixin font-face($font-family, $file-path, $font-weight: 400, $font-style: normal, $file-formats: eot woff2 woff ttf svg) {
+  @font-face {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight;
+
+    src: font-source-declaration($font-family, $file-path, $file-formats);
+  }
+}
+
+
+
+/// Used for creating the source string for fonts using @font-face
+/// Reference: http://goo.gl/Ru1bKP
+///
+/// @requires {function} font
+@function font-source-declaration($font-family, $file-path, $file-formats) {
+  $src: ();
+
+  $formats-map: (
+    ttf:   '#{$file-path}.ttf' format('truetype'),
+    woff:  '#{$file-path}.woff' format('woff'),
+    woff2: '#{$file-path}.woff2' format('woff2'),
+    eot:   '#{$file-path}.eot?#iefix' format('embedded-opentype'),
+    svg:   '#{$file-path}.svg##{$font-family}' format('svg')
+  );
+
+  @each $key, $values in $formats-map {
+    @if contains($file-formats, $key) {
+      $file-path: nth($values, 1);
+      $font-format: nth($values, 2);
+      $src: append($src, font($file-path) $font-format, comma);
+    }
+  }
+
+  @return $src;
+}
+

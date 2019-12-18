@@ -1,0 +1,54 @@
+////
+/// Cabecera del fichero box-shadow.
+/// @group Santander
+////
+
+/// Box Shadow - aplica internamente la sombra indicada si están activadas en la configuracion
+/// @access public
+/// @param {Arglist} $shadow - propiedades a aplicar
+/// @example
+/// box-shadow($box-shadow-hoffset  $box-shadow-voffset $box-shadow-blur $box-shadow-color)
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    box-shadow: $shadow!important;
+  }
+}
+
+/// Generate Shadow - aplica la sombra del tipo indicado
+/// @access public
+/// @param {String} $shadow_type - tipo de sombra estandarizada a aplicar
+/// @param {Map} $modifiers - modificadores a aplicar ('noshadow', ...)
+/// @require $box-shadow-types
+/// @example
+/// generate-shadow("full")
+@mixin generate-shadow($shadow_type: "lateral", $modifiers: null) {
+  // si existe en el mapa de shadow-types
+  @if map-has-key($box-shadow-types, $shadow_type) {
+    // shadow base
+    $shadow: map-get($box-shadow-types, $shadow_type);
+    // With modifiers
+    @if $modifiers != null{
+      // Por cada modificador introducido
+      @each $modifier in $modifiers {
+        // noborder
+        @if($modifier == 'noshadow'){
+          box-shadow: none!important;
+        }
+        @else {
+          // Modifier warnings
+          @warn "No existe el modificador #{$modifier} para la generación de sombras";
+          // generate output
+          @include box-shadow($shadow);
+        }
+      }
+    }
+    // Sin modificadores
+    @else {
+      // generate output
+      @include box-shadow($shadow);
+    }
+  } @else {
+    // Errors
+    @error "No existe la key #{$shadow_type} en el mapa de shadow-types ’$box-shadow-types’";
+  }
+};

@@ -1,0 +1,28 @@
+////
+/// Cabecera del fichero bem.
+/// @group Santander
+////
+
+/// Block Element - ayuda a la creación de elementos en una clase con nomenclatura BEM
+/// @access public
+/// @param {String} $element - Nombre del elemento
+/// @example
+/// element("test") { reglas para el elemento .xxxx__test }
+@mixin element($element) {
+  &__#{$element} {
+      @content;
+  }
+}
+
+/// Block Modifier - ayuda a la creación de modificadores en una clase con nomenclatura BEM
+/// @access public
+/// @param {String} $modifier - Nombre del modificador
+/// @example
+/// modifier("test") { reglas para el elemento .xxxx--test }
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+      @content;
+  }
+}
+
+

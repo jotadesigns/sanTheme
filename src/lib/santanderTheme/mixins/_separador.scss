@@ -1,0 +1,73 @@
+////
+/// Cabecera del fichero separador.
+/// @group Santander
+////
+
+/// Separador generate - genera las propiedades necesarias para generar un separador estandarizado
+/// @access public
+/// @param {String} $position [bottom] - posicion en la que se desea crear el separador. Valores: top, right, bottom, left
+/// @param {String} $size [regular] - tamaño del espaciado del separador.  Valores: extrasmall, small, regular, large, extralarge
+/// @require $border-width
+/// @require $border-color
+/// @require {function} getSpace
+/// @example
+/// separador-generate("top")
+@mixin separador-generate(
+  $position: bottom,
+  $size: regular
+){
+  //top
+  @if $position == top {
+    &:before{
+      border-#{$position}: $border-width solid $border-color !important;
+      padding-#{$position}: getSpace($size);
+      margin-#{$position}: getSpace($size);
+      display: block;
+      width: 100%;
+      content: '';
+    }
+  }
+  //right
+  @else if $position == right {
+    position: relative;
+    padding-right: getSpace($size)*2;
+    &:before{
+      content: '';
+      display: block;
+      width: $border-width;
+      background-color: $border-color;
+      height: 100%;
+      position: absolute;
+      right: getSpace($size);
+    }
+  }
+  //bottom
+  @else if $position == bottom {
+    &:after{
+      border-#{$position}: $border-width solid $border-color !important;
+      padding-#{$position}: getSpace($size);
+      margin-#{$position}: getSpace($size);
+      display: block;
+      width: 100%;
+      content: '';
+    }
+  }
+  //left
+  @else if $position == left {
+    position: relative;
+    padding-left: getSpace($size)*2;
+    &:before{
+      content: '';
+      display: block;
+      width: $border-width;
+      background-color: $border-color;
+      height: 100%;
+      position: absolute;
+      left: getSpace($size);
+    }
+  }
+  @else {
+    // llamada por defecto
+    @include separador-generate();
+  }
+}

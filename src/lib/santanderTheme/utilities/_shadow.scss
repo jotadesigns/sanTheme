@@ -1,0 +1,47 @@
+//////////////////////
+// Shadow
+//////////////////////
+
+.#{$theme_namespace}{ // namespace theme
+
+  &shadow{
+    //default
+    @include box-shadow($box-shadow);
+
+    //MODIFIERS
+    //color
+    @each $color, $color_value in $box-shadow-colors {
+      @include modifier($color) {
+        /* CSS declarations for `.t-shadow--{$color}` */
+        @include box-shadow($box-shadow-hoffset  $box-shadow-voffset $box-shadow-blur $color_value !important);
+      }
+    }
+    //reset
+    @include modifier('noshadow') {
+      /* CSS declarations for `.t-shadow--noshadow` */
+      @include box-shadow(none !important);
+    }
+
+    //types
+    @each $type, $value in $box-shadow-types {
+      @include element($type) {
+        /* CSS declarations for `.t-shadow__{$type}` */
+        @include box-shadow($value $box-shadow-color);
+
+        //MODIFICADORES
+        //colores sombra
+        @each $color, $color_value in $box-shadow-colors {
+          @include modifier($color){
+            /* CSS declarations for `.t-shadow__{$type}--{$color}` */
+            @include box-shadow($value $color_value !important);
+          }
+        }
+        //reset
+        @include modifier('noshadow') {
+          /* CSS declarations for `.t-shadow__{$type}--noshadow` */
+          @include box-shadow(none !important);
+        }
+      }
+    }
+  }
+}

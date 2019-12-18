@@ -1,0 +1,18 @@
+//////////////////////
+// Font-faces and Icons
+//////////////////////
+
+@each $font_name, $font_data in $font-faces {
+  // FONT-FACE
+  @include font-face-generate($font_data);
+
+  // ICONS - si la fuente tiene 'icons'
+  @if map-has-key($font_data, "icons") {
+
+    // Base class
+    @include font-icons-base($font_data, $theme_namespace);
+
+    // Icons class
+    @include font-icons-generate($font_data, $theme_namespace);
+  }
+}

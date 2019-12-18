@@ -1,0 +1,92 @@
+//////////////////////
+// Fonts
+//////////////////////
+
+// .#{$theme_namespace}{ // namespace theme
+//   &font{
+//     $paragraph: map-get($font-elements, "p"); // por defecto .t-font es el estilo del font-element 'p'
+//     @include font-generate(
+//       map-get($paragraph, "font-size"),
+//       map-get($paragraph, "font-family"),
+//       map-get($paragraph, "font-style"),
+//       map-get($paragraph, "color"),
+//       map-get($paragraph, "extraProps")
+//     );
+
+//     //MODIFIERS
+//     //colores
+//     @each $color, $value in $colors {
+//       @include modifier($color) {
+//         /* CSS declarations for `.t-font--{$color}` */
+//         color: $value !important;
+//       }
+//     }
+//     //size
+//     @each $size, $value in $font-sizes {
+//       @include modifier($size) {
+//         /* CSS declarations for `.t-font--{$size}` */
+//         font-size: $value !important;
+//       }
+//     }
+//     //weight
+//     @each $weight, $value in $font-weights {
+//       @include modifier($weight) {
+//         /* CSS declarations for `.t-font--{$weight}` */
+//         font-family: $value !important;
+//       }
+//     }
+//     //style
+//     @each $style in $font-styles {
+//       @include modifier($style) {
+//         /* CSS declarations for `.t-font--{$style}` */
+//         font-style: $style !important;
+//       }
+//     }
+
+//     //ELEMENTOS
+//     @each $element, $element_prop in $font-elements {
+//       @include element($element) {
+//         /* CSS declarations for `.t-font__{$element}` */
+//         @include font-generate(
+//             map-get($element_prop, "font-size"),
+//             map-get($element_prop, "font-family"),
+//             map-get($element_prop, "font-style"),
+//             map-get($element_prop, "color"),
+//             map-get($element_prop, "extraProps")
+//         );
+//         //MODIFIERS
+//         //colores
+//         @each $color, $value in $colors {
+//           @include modifier($color) {
+//             /* CSS declarations for `.t-font__{$element}--{$color}` */
+//             color: $value !important;
+//           }
+//         }
+//         //size
+//         //si se puede cambiar el tamaño de font (en teoria los encabezados no se puede modificar, h1, h2, h3..)
+//         @if map-get($element_prop, "resize") == true {
+//           @each $size, $value in $font-sizes {
+//             @include modifier($size) {
+//               /* CSS declarations for `.t-font__{$element}--{$size}` */
+//               font-size: $value !important;
+//             }
+//           }
+//         }
+//         //weight
+//         @each $weight, $value in $font-weights {
+//           @include modifier($weight) {
+//             /* CSS declarations for `.t-font__{$element}--{$weight}` */
+//             font-family: $value !important;
+//           }
+//         }
+//         //style
+//         @each $style in $font-styles {
+//           @include modifier($style) {
+//             /* CSS declarations for `.t-font--{$style}` */
+//             font-style: $style !important;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

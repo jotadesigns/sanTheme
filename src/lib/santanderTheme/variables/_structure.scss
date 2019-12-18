@@ -1,0 +1,842 @@
+////
+/// Cabecera del fichero structure.
+/// @group Santander
+////
+
+/**********************************/
+/******* 3 - Estructurales ********/
+/**********************************/
+/* ---------------------------
+  3.0 Utils
+-----------------------------*/
+
+// Map position
+$positions: () !default;
+/// Posibles posiciones
+/// @type Map
+$positions: map-merge(
+  (
+    "top":    "top",
+    "right":  "right",
+    "bottom": "bottom",
+    "left":   "left"
+  ),
+  $positions
+);
+
+// Map sizes
+$sizes: () !default;
+/// Posibles tamaños
+/// @type Map
+$sizes: map-merge(
+  (
+    "extrasmall":     "extrasmall",
+    "small":          "small",
+    "regular":        "regular",
+    "large":          "large",
+    "extralarge":     "extralarge"
+  ),
+  $sizes
+);
+
+
+// Map layers
+$layers: () !default;
+/// Asignación de posicionamiento en pantalla (z-index)
+/// @type Map
+$layers: (
+  modal: 8,
+  logo: 7,
+  header: 6,
+  footer: 5,
+  sidebar: 4,
+  caption: 3,
+  image: 2,
+  text: 1
+);
+
+// Rotate options
+$rotateOptions: (
+  "rotateRight": 90deg,
+  "rotateBottom": 180deg,
+  "rotateLeft": 270deg
+);
+
+/* ---------------------------
+  3.1 Borders
+-----------------------------*/
+//////////// Border
+
+/// base por defecto del ancho de los bordes
+/// @type String
+$border-width: 1px !default;
+
+/// posibles anchuras de borde
+/// @type Map
+/// @require $border-width
+$border-sizes: (
+  "regular": $border-width,
+  "large": $border-width * 2
+);
+
+//////////// Radius
+
+/// Base por defecto del border-radius
+/// @type String
+$border-radius-base:  5px !default; // Base
+
+/// Border-radius para círculos
+/// @type String
+$border-radius-circle: 50% !default; // circulo
+
+$borders-radius: () !default;
+/// Posibles tamaños de border-radius
+/// @type Map
+/// @require $border-radius-base
+$borders-radius: map-merge(
+  (
+    "small": $border-radius-base * .5, //2,5
+    "regular": $border-radius-base,    // 5
+    "large": $border-radius-base * 2,  //10
+  ),
+  $borders-radius
+);
+
+/// Base por defecto del border-radius en botones
+/// @type String
+/// @require $border-radius-base
+$btn-border-radius:     $border-radius-base * 6 !default; // boton radius default
+
+/// Base por defecto del border-radius en inputs
+/// @type String
+/// @require $border-radius-base
+$input-border-radius:   $border-radius-base !default; // input radius default
+
+/* ---------------------------
+  3.2 Shadows
+-----------------------------*/
+//////////// default
+
+/// Base por defecto del box-shadow horizontal offset
+/// @type String
+$box-shadow-hoffset: 3px !default;
+
+/// Base por defecto del box-shadow vertical offset
+/// @type String
+$box-shadow-voffset: 2px!default;
+
+/// Base por defecto del box-shadow blur
+/// @type String
+$box-shadow-blur: 5px !default;
+
+/// Base por defecto del box-shadow
+/// @type Arglist
+/// @require $box-shadow-hoffset
+/// @require $box-shadow-voffset
+/// @require $box-shadow-blur
+/// @require $box-shadow-color
+$box-shadow: $box-shadow-hoffset  $box-shadow-voffset $box-shadow-blur $box-shadow-color !default;
+
+//////////// types
+
+/// Tipos estandarizados de sombras
+/// @type Map
+/// @require $box-shadow-hoffset
+/// @require $box-shadow-voffset
+/// @require $box-shadow-blur
+$box-shadow-types:(
+  // HBS Menu
+  "nav_menu": 0px 1px 2px 0px rgba(0,0,0,0.18),
+  // HBS boxes
+  "full": ($box-shadow-hoffset * 0) ($box-shadow-voffset * 0) ($box-shadow-blur * 1.6) $box-shadow-color,
+  "lateral": $box-shadow,
+  "full_dark": ($box-shadow-hoffset * 0) ($box-shadow-voffset * 0) ($box-shadow-blur * 1.6)  map-get($box-shadow-colors , "san_gray-light"),
+  "lateral_dark": $box-shadow-hoffset  $box-shadow-voffset $box-shadow-blur map-get($box-shadow-colors , "san_gray-light"),
+  // HBS forms
+  "input": 1px 1px 3px $box-shadow-color inset,
+  "overlayPanel":  0 3px 4px 0px $box-shadow-color, // para autocomplete (not select cause disableCentering)
+  "overlayPanel_up":  0 -3px 4px 0px $box-shadow-color, // para autocomplete (not select cause disableCentering)
+  // Material toggle
+  "toggle": 0px 2px 4px 0px map-get($box-shadow-colors , "san_gray-dark"),
+  "toggle_disabled":  0px 2px 4px 0px map-get($box-shadow-colors , "san_gray-light"),
+  // Arrow
+  "arrow": 2px 0px 0px 0px $box-shadow-color
+);
+
+/* ---------------------------
+  3.2 Fonts
+-----------------------------*/
+
+
+/* ---------------------------
+  3.3 Spacing
+-----------------------------*/
+// Control the default styling of most elements by modifying these
+// variables. Mostly focused on spacing.
+
+/// Base del espaciado para elementos
+/// @type String
+$spacer: 10px !default; //base espaciado
+
+$spacers: () !default;
+/// Medidas standarizadas de espaciado de elementos
+/// @type Map
+/// @require $spacer
+$spacers: map-merge(
+  (
+    0: 0,               // 0
+    "extrasmall": ($spacer * .25), // 2,5
+    "small": ($spacer * .5),  // 5
+    "regular": $spacer,         // 10
+    "large": ($spacer * 1.5), // 15
+    "extralarge": ($spacer * 3)    // 30
+  ),
+  $spacers
+);
+
+/// Array auxiliar para la generación de la utilitie 'spacers'
+/// @type Array
+$spacer_groups: (
+  "margin" , "padding"
+);
+
+/* ---------------------------
+  3.4 Buttons
+-----------------------------*/
+/// Tamaños de botones estandarizados
+/// @type Map
+$button-sizes: (
+  //padding del boton (determina el tamaño de este)
+  "none": 0,
+  "small": 8px 20px 8px 20px,
+  "regular": 12px 20px 12px 20px,
+  "large": 25px,
+  "extra": 15px 10px 15px 10px,
+  "inherit": 0,
+  "alerts_sizes": 10px 5px,
+);
+
+$button-typographys: (
+  "link": (
+    properties : (
+      color: getColor("san_red"),
+      text-decoration: underline,
+    ),
+    hover: ()
+  ),
+  "text": (
+    properties : (
+      color: #4a4a4a,
+      font-size: 12px,
+      text-decoration: none
+    ),
+    hover: ()
+  ),
+  "blobText": (
+    properties : (
+      color: #4a4a4a,
+      font-size: 20px,
+      font-family: 'text',
+      font-weight: 400,
+      font-style: normal,
+      text-decoration: none,
+      margin-top: 10px
+    ),
+    hover: ()
+  ),
+);
+
+/// Tipos de botones estandarizados
+/// @type Map
+/// @require $border-color
+/// @require $border-width
+/// @require getColor
+/// @require getFontFamily
+$button-elements: (
+  // Primario
+  "primary": (
+    global: (
+      line-height: 14px!important,
+      border-radius: $btn-border-radius!important,
+      padding: map-get($button_sizes, 'alertsButton')!important,
+      font-family: 'text',
+      font-weight: 400,
+      font-style: normal,
+      color:  getColor("san_white"),
+      background-color: getColor(),
+      border: 1px solid getColor(),
+      width: auto,
+      min-width: 0,
+      overflow: hidden,
+      height: auto,
+      white-space: normal
+    ),
+    active:(
+      background-color: #781d1d,
+      border: 1px solid #781d1d,
+    ),
+    disabled: (
+      color: rgba(0,0,0,.26),
+      background-color: $border-color,
+      border: $border-width solid $border-color
+    ),
+    materialSet: (
+      '.mat-button-wrapper': (
+        height: 100%,
+        width: 100%,
+        display: flex,
+        flex-flow: row,
+        align-items: center,
+        text-align: left
+      ),
+      '.mat-button-wrapper app-icon' : (
+        width: auto,
+        height: auto,
+        line-height: initial,
+        padding-right: 10px,
+        font-size: 14px,
+        display: flex
+      ),
+      '.mat-button-wrapper .c-button__wrapper' : (
+        display: flex,
+        margin: auto
+      )
+    )
+  ),
+  // Secundario
+  "secondary": (
+    global: (
+      //text
+      font-family: 'text',
+      font-weight: 400,
+      font-style: normal,
+      color:  getColor(),
+      background-color: transparent,
+      //estructure
+      line-height: 14px,
+      overflow: hidden,
+      height: auto,
+      width: auto,
+      min-width: 0,
+      border-radius: $btn-border-radius,
+      padding: map-get($button_sizes, 'regular'),
+      border: 1px solid getColor(),
+      white-space: normal
+    ),
+    active:(
+      background-color: #781d1d,
+      border: 1px solid #781d1d,
+      color: #fff
+    ),
+    disabled: (
+      border: $border-width solid $border-color,
+      color: #a0a0a0
+    ),
+    materialSet: (
+      '.mat-button-wrapper': (
+        height: 100%,
+        width: 100%,
+        display: flex,
+        flex-flow: row,
+        align-items: center,
+        text-align: left
+      ),
+      '.mat-button-wrapper app-icon' : (
+        width: auto,
+        height: auto,
+        line-height: initial,
+        padding-right: 10px,
+        font-size: 14px,
+        display: flex
+      ),
+      '.mat-button-wrapper .c-button__wrapper' : (
+        display: flex,
+        margin: auto
+      ),
+      '.mat-button-wrapper .c-button__wrapper::first-letter' : (
+        text-transform: uppercase
+      ),
+    )
+  ),
+  // line
+  "line": (
+    global: (
+      line-height: 14px!important,
+      border-radius: 0!important,
+      padding: map-get($button_sizes, 'regular')!important,
+      font-family: 'text',
+      font-weight: 400,
+      font-style: normal,
+      color:  getColor(),
+      background-color: transparent,
+      border: none,
+      width: auto,
+      min-width: 0,
+      overflow: hidden,
+      height: auto,
+      white-space: normal
+    ),
+    active:(
+      color: #781d1d
+    ),
+    disabled: (
+      color: rgba(0,0,0,.26),
+      background-color: $border-color,
+      border: $border-width solid $border-color
+    ),
+    materialSet: (
+      '.mat-button-wrapper': (
+        height: 100%,
+        width: 100%,
+        display: flex,
+        flex-flow: row,
+        align-items: center,
+        text-align: left
+      ),
+      '.mat-button-wrapper app-icon' : (
+        width: auto,
+        height: auto,
+        line-height: initial,
+        padding-right: 10px,
+        font-size: 14px,
+        display: flex
+      ),
+      '.mat-ripple .mat-ripple-element': (
+        background-color: transparent
+      ),
+      '.mat-button-wrapper .c-button__wrapper' : (
+        display: flex,
+        margin: auto
+      )
+    )
+  ),
+  "selective": (
+    global: (
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      line-height: 19px !important,
+      color:  #11b3bc,
+      background-color: white,
+      overflow: hidden,
+      height: auto,
+      width: 100%,
+      min-width: 130px,
+      margin: 0px,
+      border-radius: $border-radius-base !important,
+      padding: map-get($button_sizes, "extra"),
+      border: 1px solid #11b3bc,
+      box-shadow: map-get($box-shadow-types, "lateral"),
+      white-space: normal,
+      text-align: center
+    ),
+    active:(
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      background-color: white,
+      border: 1px solid #11b3bc,
+      color:  #11b3bc
+    ),
+    disabled: (
+      border: $border-width solid $border-color,
+      color: #8c8c8c,
+      cursor: pointer,
+      pointer-events: none
+    ),
+    materialSet: (
+    )
+  ),
+  "no-active": (
+    global: (
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      line-height: 19px !important,
+      color:  $san_gray-button,
+      background-color: white,
+      overflow: hidden,
+      height: auto,
+      width: 100%,
+      min-width: 130px,
+      margin: 0px,
+      border-radius: $border-radius-base !important,
+      padding: map-get($button_sizes, "extra"),
+      border: 1px solid getColor("san_gray-button"),
+      box-shadow: map-get($box-shadow-types, "lateral"),
+      white-space: normal,
+      cursor: pointer,
+      text-align: center
+    ),
+    active:(
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      background-color: white,
+      border: 1px solid #11b3bc,
+      color:  #11b3bc
+    ),
+    disabled: (
+      border: $border-width solid $border-color,
+      color: $san_gray-button,
+      cursor: pointer,
+      pointer-events: none,
+      opacity: 0.7
+    ),
+    materialSet: (
+    )
+  ),
+  // blob
+  "vertical": (
+    global: (
+      line-height: 14px!important,
+      border-radius: 0!important,
+      padding: 0!important,
+      font-family: 'text',
+      font-weight: 400,
+      font-style: normal,
+      color: getColor("san_red")!important,
+      background-color: transparent,
+      border: none,
+      width: auto,
+      min-width: 0,
+      overflow: hidden,
+      height: auto,
+      white-space: normal
+    ),
+    active:(
+      color: #781d1d
+    ),
+    disabled: (
+      opacity: 0.6
+    ),
+    materialSet: (
+      '.mat-button-wrapper': (
+        height: 100%,
+        width: 100%,
+        display: flex,
+        flex-flow: column,
+        align-items: center,
+        text-align: center
+      ),
+      '.mat-button-wrapper app-icon' : (
+        width: auto,
+        height: auto,
+        line-height: initial,
+        padding-right: 0,
+        font-size: 14px,
+        display: flex,
+        margin-bottom: 0
+      ),
+      '.mat-ripple .mat-ripple-element': (
+        background-color: transparent
+      ),
+      '.mat-button-wrapper .c-button__wrapper' : (
+        display: flex,
+        margin: auto,
+        font-size: 12px,
+        text-decoration: underline,
+        font-family: 'text',
+        font-weight: 600,
+        font-style: normal,
+      )
+    )
+  )
+  ,
+  //ALERTS BUTTONS
+  "alerts_button": (
+    global: (
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      font-size: 16px,
+      line-height: 19px ,
+      color: getColor("san_red"),
+      background-color: #fff,
+      overflow: hidden,
+      height: auto,
+      width: 100%,
+      min-width: 100%,
+      margin: 0px,
+      border-radius: $border-radius-base !important,
+      padding: map-get($button_sizes, "alerts_sizes"),
+      border: none,      
+      white-space: normal,
+      text-align: center,
+      box-sizing: border-box
+    ),
+    active:(
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      color: getColor("san_red"),
+      background-color: #fff,
+      box-shadow: map-get($box-shadow-types, "lateral"),
+      border: none,
+    ),
+    disabled: (
+      border: none,
+      color: transparent,
+      cursor: pointer,
+      pointer-events: none
+    ),
+    materialSet: (
+    )
+  ),  
+);
+
+
+/* ---------------------------
+  3.5 Tooltip elements
+-----------------------------*/
+$tooltip_block_name: "tooltip";
+// elements
+$tooltip-elements: (
+  standard: (
+    font-family: 'text',
+    font-style: normal,
+    font-size: 10px,
+    color: white,
+    line-height: normal,
+    background: rgba(97,97,97,.9),
+    position: absolute,
+    padding: 6px 8px,
+    text-align: center,
+    text-overflow: ellipsis,
+    left: 0,
+    top: 0,
+    opacity: 0,
+    overflow: hidden,
+    z-index: 999999,
+    transition: opacity 0.6s ease-out,
+    // width
+    min-width: 30px,
+    max-width: 450px
+  ),
+  standardFixedWith: (
+    font-family: 'text',
+    font-style: normal,
+    font-size: 10px,
+    color: white,
+    line-height: normal,
+    background: rgba(97,97,97,.9),
+    position: absolute,
+    padding: 6px 8px,
+    text-align: center,
+    text-overflow: ellipsis,
+    left: 0,
+    top: 0,
+    opacity: 0,
+    overflow: hidden,
+    z-index: 999999,
+    transition: opacity 0.6s ease-out,
+    // width
+    min-width: 30px,
+    width: 350px
+  ),
+  secondary: (
+    font-family: 'text',
+    font-style: normal,
+    font-size: 10px,
+    color: white,
+    line-height: normal,
+    background: red,
+    position: absolute,
+    padding: 6px 8px,
+    text-align: center,
+    text-overflow: ellipsis,
+    left: 0,
+    top: 0,
+    opacity: 0,
+    overflow: hidden,
+    z-index: 999999,
+    transition: opacity 0.6s ease-out,
+    // width
+    min-width: 30px,
+    max-width: 450px
+  ),
+  filter: (
+    font-family: 'text',
+    font-style: normal,
+    font-size: 10px,
+    color: black,
+    line-height: normal,
+    box-shadow: map-get($box-shadow-types, "lateral"),
+    background: white,
+    border: 1px solid #e6e6e6,
+    position: absolute,
+    padding: 20px,
+    text-align: center,
+    text-overflow: ellipsis,
+    left: 0,
+    top: 0,
+    opacity: 0,
+    overflow: hidden,
+    z-index: 999, // header z-index: 1000
+    transition: opacity 0.6s ease-out,
+    // width
+    min-width: 30px,
+    width: 180px
+ ),
+ mat_card: (
+    font-family: 'text',
+    font-style: normal,
+    font-size: 10px,
+    color: #4a4a4a,
+    line-height: normal,
+    box-shadow: map-get($box-shadow-types, "lateral"),
+    background: white,
+    border: 1px solid #e6e6e6,
+    position: absolute,
+    padding: 15px 12.5px,
+    text-align: left,
+    text-overflow: ellipsis,
+    left: 0,
+    top: 0,
+    opacity: 0,
+    overflow: visible,
+    z-index: 999, // header z-index: 1000
+    transition: opacity 0.6s ease-out,
+    // width
+    min-width: 30px,
+    width: 380px,
+    arrow: ( // controlado por mixin (:before)
+      OPEN_POPUP_POSITION_CENTERBOTTOM: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        top: -12.5px,
+        left: calc(50% - 13.5px),
+        border-width: 0 12.5px 12.5px 12.5px,
+        border-color: transparent transparent #ffffff transparent,
+        filter: drop-shadow(1px -1px 1px rgba(0, 0, 0, 0.1))
+      ),
+      OPEN_POPUP_POSITION_CENTERTOP: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        bottom: -12.5px,
+        left: calc(50% - 13.5px),
+        border-width: 12.5px 12.5px 0 12.5px,
+        border-color: #fff transparent transparent transparent,
+        filter: drop-shadow(1px 3px 1px rgba(0, 0, 0, 0.1))
+      ),
+      OPEN_POPUP_POSITION_TOPLEFT: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        bottom: -10px,
+        right: 8px,
+        border-width: 10px 5px 0 10px,
+        border-color: #ffffff transparent transparent transparent,
+        filter: drop-shadow(1px 3px 1px rgba(0, 0, 0, 0.1))
+      ),
+      OPEN_POPUP_POSITION_TOPRIGHT: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        bottom: -10px,
+        left: 8px,
+        border-width: 10px 10px 0 5px,
+        border-color: #ffffff transparent transparent transparent,
+        filter: drop-shadow(1px 3px 1px rgba(0, 0, 0, 0.1))
+      ),
+      OPEN_POPUP_POSITION_BOTTOMLEFT: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        top: -10px,
+        right: 8px,
+        border-width: 0 5px 10px 10px,
+        border-color: transparent transparent #ffffff transparent,
+        filter: drop-shadow(1px -1px 1px rgba(0, 0, 0, 0.1))
+      ),
+      OPEN_POPUP_POSITION_BOTTOMRIGHT: (
+        content: ' ',
+        position: absolute,
+        width: 0,
+        height: 0,
+        border-style: solid,
+        top: -10px,
+        left: 8px,
+        border-width: 0 10px 10px 5px,
+        border-color: transparent transparent #ffffff transparent,
+        filter: drop-shadow(0px -1px 0px rgba(0, 0, 0, 0.1))
+      )
+    )
+    // max-width: 400px
+ )
+);
+
+// modifiers
+$tooltip-border-radius: 2px;
+$tooltip-border-radius_mid: $tooltip-border-radius * 2.5;
+$toolip-border-radius_big: $tooltip-border-radius * 10;
+
+
+
+/*********************************/
+/******** Keywords Value *********/
+/*********************************/
+
+$keywordsValue: (
+  standar: (
+    global: (
+      margin-top: getSpace(),
+      padding-right: getSpace(),
+      font-size: getFontSize("small")
+    ),
+    key: (
+      color: getColor("san_gray-light"),
+      font-family: 'text',
+      font-weight: 300,
+      font-style: normal,
+    ),
+    value: (
+      margin-top: getSpace("small"),
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+    ),
+    subValue: ()
+  ),
+  success: (
+    global: (
+      font-size: 13px,
+      padding-right: getSpace(),
+      margin-top: 25px
+    ),
+    key: (
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      margin: 0,
+      margin-bottom: 5px,
+      text-transform: uppercase,
+      color: getColor()
+    ),
+    value: (
+      font-family: 'text',
+      font-weight: 700,
+      font-style: normal,
+      color: #4a4a4a
+    ),
+    subValue: (
+      font-family: 'text',
+      font-weight: 300,
+      font-style: normal,
+      color: #b5b5b5
+    )
+  )
+);
+

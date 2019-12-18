@@ -1,0 +1,160 @@
+//////////////////////
+// Border
+//////////////////////
+
+@mixin border($element:null, $modifiers:null){
+  $base: (
+    'border' : $border-width solid $border-color
+  );
+  // BASE
+  @if $element == null {
+    border: map-get($base,'border');
+    // BASE - MODIFIERS
+    @if $modifiers != null {
+      // Por cada modificador introducido
+      @each $modifier in $modifiers {
+        // colores - $border-colors
+        @include map-has-key-then-write-modifier('border-color', $border-colors, $modifier);
+        // sizes - $border-sizes
+        @include map-has-key-then-write-modifier('border-width', $border-sizes, $modifier);
+        // noborder
+        @if($modifier == 'noborder'){
+          border: 0 !important;
+        }
+      }
+    }
+  }
+  // ELEMENTS
+  @else if map-has-key($positions, $element) { // tiene element y esta en el mapa de posiciones
+    border-#{$element}: map-get($base,'border');
+    // ELEMENT - MODIFIERS
+    @if $modifiers != null {
+      // Por cada modificador introducido
+      @each $modifier in $modifiers {
+        // Colores - $border-colors
+        @include map-has-key-then-write-modifier('border-#{$element}-color', $border-colors, $modifier);
+        // Sizes - $border-sizes
+        @include map-has-key-then-write-modifier('border-#{$element}-width', $border-sizes, $modifier);
+        // noborder
+        @if($modifier == 'noborder'){
+          border-#{$element}: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin t-border($borders...){
+
+  // si es un mapa
+  @if is-map($borders){
+    @each $border in $borders {
+      @include border($border...);
+    }
+  }
+  // si es arglist
+  @else{
+    @include border($borders...);
+  }
+}
+
+.#{$theme_namespace}{ // namespace theme
+
+  &border{
+    border: $border-width solid $border-color !important;
+
+    // MODIFIERS
+    //colores
+    @each $color, $value in $border-colors {
+      @include modifier(#{$color}) {
+       /* CSS declarations for `.t-border--{$color}` */
+       border-color: $value !important;
+      }
+    }
+    // sizes
+    @each $size, $value in $border-sizes {
+      @include modifier(#{$size}) {
+        /* CSS declarations for `.t-border--{$size}` */
+        border-width: $value !important;
+      }
+    }
+    //reset
+    @include modifier('noborder') {
+      /* CSS declarations for `.t-border--noborder` */
+      border: 0 !important;
+    }
+
+    // Positions
+    @each $position, $value in $positions {
+      @include element($value) {
+        /* CSS declarations for `.t-border__position` */
+        border-#{$position}: $border-width solid $border-color !important;
+
+        //MODIFIERS ELEMENT
+        // colores
+        @each $color, $value in $border-colors {
+          @include modifier(#{$color}) {
+           /* CSS declarations for `.t-border__position--{$color}` */
+           border-#{$position}-color: $value !important;
+         }
+        }
+        //sizes
+        @each $size, $value in $border-sizes {
+          @include modifier(#{$size}) {
+           /* CSS declarations for `.t-border__position--{$size}` */
+           border-#{$position}-width: $value !important;
+         }
+        }
+        //reset
+        @include modifier('noborder') {
+          /* CSS declarations for `.t-border--noborder` */
+          border-#{$position}: 0 !important;
+        }
+      }
+    }
+  }
+
+  // Rounded
+  &rounded{
+    @include border-radius($border-radius-base);
+
+    //MODIFIERS
+    //circle
+    @include modifier('circle'){
+      @include border-radius($border-radius-circle);
+    }
+    //size
+    @each $size, $value in $borders-radius {
+      @include modifier($size) {
+        @include border-radius($value);
+      }
+    }
+    //reset
+    @include modifier('norounded'){
+      @include border-radius(0);
+    }
+
+    // Positions
+    @each $position, $value in $positions {
+      @include element($value) {
+        @include border-radius($border-radius-base, $position);
+
+        //MODIFIERS
+        //circle
+        @include modifier('circle'){
+          @include border-radius($border-radius-circle, $position);
+        }
+        //size
+        @each $size, $value in $borders-radius {
+          @include modifier($size) {
+            @include border-radius($value, $position);
+          }
+        }
+        //reset
+        @include modifier('norounded'){
+          @include border-radius(0, $position);
+        }
+      }
+    }
+  }
+}
